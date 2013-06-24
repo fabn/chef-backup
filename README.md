@@ -23,6 +23,7 @@ Attributes which should be set
  doing full filesystem backups with `duplicity_full` recipe.
 * `node[:duplicity][:full][:target_user]` username to use if not embedded in `target`
 * `node[:duplicity][:full][:target_pass]` password to use if not embedded in `target`
+* `node[:duplicity][:full][:european_bucket]` (default false) if true an european bucket will be used for S3 targets
 
 Attributes which should not require tuning
 ------------------------------------------

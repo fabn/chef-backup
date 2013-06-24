@@ -14,7 +14,7 @@ define :duply_profile,
     not_if "test -d /etc/duply/#{profile_name}"
   end
 
-  template_var_keys = [:source, :target, :target_user, :target_pass]
+  template_var_keys = [:source, :target, :target_user, :target_pass, :european_bucket]
   template_variables = params.select { |k,_| template_var_keys.include? k.to_sym }
 
   # Configure profile through template

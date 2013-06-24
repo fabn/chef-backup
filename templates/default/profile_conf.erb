@@ -142,3 +142,7 @@ ARCH_DIR=<%= node[:duplicity][:archive_path] %>
 # Always use new style for S3 buckets to allow selection of european buckets
 # don't forget to leave a separating space char at the end
 DUPL_PARAMS="$DUPL_PARAMS --s3-use-new-style "
+
+<%- if @european_bucket -%>
+DUPL_PARAMS="$DUPL_PARAMS --s3-european-buckets "
+<%- end -%>

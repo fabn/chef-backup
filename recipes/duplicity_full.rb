@@ -26,5 +26,6 @@ duply_profile 'filesystem_full' do
   target node[:duplicity][:full][:target]
   target_user node[:duplicity][:full][:target_user]
   target_pass node[:duplicity][:full][:target_pass]
+  european_bucket node[:duplicity][:full][:european_bucket]
   interval :daily
 end
