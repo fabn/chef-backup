@@ -16,6 +16,20 @@ This cookbook have the following dependencies:
 
 # Attributes
 
+Attributes which should be set
+------------------------------
+
+* `node[:duplicity][:full][:target]` duplicity [target](http://duplicity.nongnu.org/duplicity.1.html#sect8) to use when
+ doing full filesystem backups with `duplicity_full` recipe.
+* `node[:duplicity][:full][:target_user]` username to use if not embedded in `target`
+* `node[:duplicity][:full][:target_pass]` password to use if not embedded in `target`
+
+Attributes which should not require tuning
+------------------------------------------
+
+* `node[:duplicity][:archive_path]` (default `/var/cache/duplicity`) path used by duplicity to store cached stuff used
+  to improve bandwidth usage and backup time for incremental backups
+
 # Recipes
 
 * `duplicity`: Install and configure [duplicity](http://duplicity.nongnu.org/) and its wrapper [duply](http://duply.net/)

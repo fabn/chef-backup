@@ -10,9 +10,12 @@ define :duply_profile,
 
   # invoke duply create profile
   execute "create duply profile #{profile_name}" do
-    command "duply #{profile_name}"
+    command "duply #{profile_name} create"
     not_if "test -d /etc/duply/#{profile_name}"
   end
+
+  template_var_keys = [:source, :target, :target_user, :target_pass]
+  template_variables = params.select { |k,_| template_var_keys.include? k.to_sym }
 
   # Configure profile through template
   template "/etc/duply/#{profile_name}/conf" do
@@ -20,6 +23,7 @@ define :duply_profile,
     owner 'root'
     group 'root'
     mode '0600'
+    variables template_variables
   end
 
   # pre and post script
