@@ -118,6 +118,10 @@ duply_profile "user\_home\_s3" do
 end
 ```
 
+# TODO
+
+* Create a `duplicity_data_bag` recipe to load duply profiles from a given data bag
+
 # Author
 
 Author:: Fabio Napoleoni (<f.napoleoni@gmail.com>)
