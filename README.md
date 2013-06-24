@@ -21,6 +21,8 @@ See also [system_base](https://github.com/fabn/system_base_cookbook) cookbook.
 Attributes which should be set
 ------------------------------
 
+These attributes are used to configure the `duplicity_full` recipe
+
 * `node[:duplicity][:full][:target]` duplicity [target](http://duplicity.nongnu.org/duplicity.1.html#sect8) to use when
  doing full filesystem backups with `duplicity_full` recipe.
 * `node[:duplicity][:full][:target_user]` username to use if not embedded in `target`
@@ -28,6 +30,14 @@ Attributes which should be set
 * `node[:duplicity][:full][:european_bucket]` (default false) if true an european bucket will be used for S3 targets
 * `node[:duplicity][:full][:encryption_password]` (default nil) if given backup will be symmetrically encrypted
 * `node[:duplicity][:full][:exclude]` (default `node[:duplicity][:default_excludes]`) paths to exclude in a full backup
+
+These attributes are used to configure the `duplicity_mysql` backup, the meaning of attributes is the same of above
+
+* `node[:duplicity][:mysql][:target]` duplicity target to store mysql backups
+* `node[:duplicity][:mysql][:target_user]` username to use if not embedded in `target`
+* `node[:duplicity][:mysql][:target_pass]` password to use if not embedded in `target`
+* `node[:duplicity][:mysql][:european_bucket]` (default false) if true an european bucket will be used for S3 targets
+* `node[:duplicity][:mysql][:encryption_password]` (default nil) if given backup will be symmetrically encrypted
 
 Attributes which should not require tuning
 ------------------------------------------
@@ -44,8 +54,11 @@ Attributes which should not require tuning
 * `duplicity`: Install and configure [duplicity](http://duplicity.nongnu.org/) and its wrapper [duply](http://duply.net/)
 * `duplicity_full`: Configure duplicity to take daily backups of full filesystem and store them in the given target
 * `mysql-zrm-solo`: Install and configure MySQL ZRM package to take database full and incremental backups
+* `duplicity_mysql`: Configure a duplicity profile which will take mysql backups and store them in the given target
 
-Currently for duplicity stuff no GPG signing is implemented, only symmetric encryption is available
+Currently for duplicity stuff no GPG signing is implemented, only symmetric encryption is available.
+
+MySQL zrm is not configured for encryption, you can encrypt remote backups using the `duplicity_mysql` provided recipe.
 
 Definitions
 ===========

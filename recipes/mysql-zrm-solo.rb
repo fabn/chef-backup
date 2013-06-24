@@ -43,3 +43,17 @@ template '/etc/mysql-zrm/mysql-zrm.conf' do
   group 'mysql'
   mode '0600'
 end
+
+# Configure an empty backup set (which will take all defaults from above file)
+directory '/etc/mysql-zrm/localhost' do
+  owner 'mysql'
+  group 'mysql'
+  mode '0600'
+end
+
+file '/etc/mysql-zrm/localhost/mysql-zrm.conf' do
+  content 'host=localhost'
+  owner 'mysql'
+  group 'mysql'
+  mode '0600'
+end
