@@ -14,7 +14,9 @@ This cookbook have the following dependencies:
 * `logrotate` (opscode) for rotating duplicity logfiles
 * `system_base` to load encrypted databags as node attributes and to configure mysql user files
 
-See also [system_base](https://github.com/fabn/system_base_cookbook) cookbook.
+See also
+
+* [system_base](https://github.com/fabn/system_base_cookbook) cookbook
 
 # Attributes
 
@@ -55,6 +57,7 @@ Attributes which should not require tuning
 * `duplicity_full`: Configure duplicity to take daily backups of full filesystem and store them in the given target
 * `mysql-zrm-solo`: Install and configure MySQL ZRM package to take database full and incremental backups
 * `duplicity_mysql`: Configure a duplicity profile which will take mysql backups and store them in the given target
+* `ec2-consistent-snapshot`: Install ec2-consistent-snapshot package from ubuntu ppa:/alestic
 
 Currently for duplicity stuff no GPG signing is implemented, only symmetric encryption is available.
 
