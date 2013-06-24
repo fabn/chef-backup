@@ -8,3 +8,4 @@ default[:duplicity][:full][:target] = nil
 default[:duplicity][:full][:target_user] = nil
 default[:duplicity][:full][:target_pass] = nil
 default[:duplicity][:full][:european_bucket] = false
+default[:duplicity][:full][:encryption_password] = nil

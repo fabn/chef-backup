@@ -24,6 +24,7 @@ Attributes which should be set
 * `node[:duplicity][:full][:target_user]` username to use if not embedded in `target`
 * `node[:duplicity][:full][:target_pass]` password to use if not embedded in `target`
 * `node[:duplicity][:full][:european_bucket]` (default false) if true an european bucket will be used for S3 targets
+* `node[:duplicity][:full][:encryption_password]` (default nil) if given backup will be symmetrically encrypted
 
 Attributes which should not require tuning
 ------------------------------------------
@@ -35,6 +36,8 @@ Attributes which should not require tuning
 
 * `duplicity`: Install and configure [duplicity](http://duplicity.nongnu.org/) and its wrapper [duply](http://duply.net/)
 * `duplicity_full`: Configure duplicity to take daily backups of full filesystem and store them in the given target
+
+Currently for duplicity stuff no GPG signing is implemented, only symmetric encryption is available
 
 Definitions
 ===========
@@ -61,8 +64,7 @@ Optional parameters:
 * `interval`: (default `:daily`) the interval for this profile, allowed values :daily, :weekly, :monthly
 * `target_user`: (default nil) target username
 * `target_pass`: (default nil) target password
-* `encryption_password`: (default `'disabled'`) GPG symmetric key to encrypt backups, if `'disabled'`
- backups won't be encrypted
+* `encryption_password`: (default nil) GPG symmetric passphrase to encrypt backups, if `nil` backups won't be encrypted
 * `pre_script`: (default nil) shell script content to execute before the backup
 * `post_script`: (default nil) shell script content to execute after the backup
 
