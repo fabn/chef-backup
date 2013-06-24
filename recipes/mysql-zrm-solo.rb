@@ -17,6 +17,10 @@
 # limitations under the License.
 #
 
+# Ensure mysql is configured for root to allow mysql-zrm to take backups
+# using ~/.my.cnf file configured by this recipe
+include_recipe 'system_base::mysql_config'
+
 # Download remote package, not included in usual apt repositories
 remote_file "/tmp/#{File.basename(node[:mysql_zrm][:package])}" do
   source node[:mysql_zrm][:package]

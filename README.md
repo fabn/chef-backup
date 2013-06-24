@@ -12,7 +12,9 @@ Includes strategy for making backups using the following tools/strategies:
 This cookbook have the following dependencies:
 
 * `logrotate` (opscode) for rotating duplicity logfiles
-* `system_base` to load encrypted databags as node attributes
+* `system_base` to load encrypted databags as node attributes and to configure mysql user files
+
+See also [system_base](https://github.com/fabn/system_base_cookbook) cookbook.
 
 # Attributes
 
