@@ -28,6 +28,14 @@ directory '/etc/duply' do
   mode '0700'
 end
 
+# Create directory for duplicity cache
+directory node[:duplicity][:archive_path] do
+  action :create
+  owner 'root'
+  group 'root'
+  mode '0700'
+end
+
 # Add logrotate configuration file for duplicity log file created by duply
 logrotate_app 'duplicity' do
   path '/var/log/duplicity.log'
