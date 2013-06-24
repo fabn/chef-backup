@@ -35,11 +35,13 @@ Attributes which should not require tuning
 * `node[:duplicity][:default_excludes]` (default `%w(/proc /sys /mnt /tmp /var/lib/mysql)`) default paths excluded in a
  backup. `/var/lib/mysql` is included because it's almost useless to take filesystem snapshots unless tables are flushed
  and locked.
+* `node[:mysql_zrm][:package]` url of .deb package for current version of MySQL ZRM
 
 # Recipes
 
 * `duplicity`: Install and configure [duplicity](http://duplicity.nongnu.org/) and its wrapper [duply](http://duply.net/)
 * `duplicity_full`: Configure duplicity to take daily backups of full filesystem and store them in the given target
+* `mysql-zrm-solo`: Install and configure MySQL ZRM package to take database full and incremental backups
 
 Currently for duplicity stuff no GPG signing is implemented, only symmetric encryption is available
 
