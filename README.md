@@ -25,12 +25,16 @@ Attributes which should be set
 * `node[:duplicity][:full][:target_pass]` password to use if not embedded in `target`
 * `node[:duplicity][:full][:european_bucket]` (default false) if true an european bucket will be used for S3 targets
 * `node[:duplicity][:full][:encryption_password]` (default nil) if given backup will be symmetrically encrypted
+* `node[:duplicity][:full][:exclude]` (default `node[:duplicity][:default_excludes]`) paths to exclude in a full backup
 
 Attributes which should not require tuning
 ------------------------------------------
 
 * `node[:duplicity][:archive_path]` (default `/var/cache/duplicity`) path used by duplicity to store cached stuff used
   to improve bandwidth usage and backup time for incremental backups
+* `node[:duplicity][:default_excludes]` (default `%w(/proc /sys /mnt /tmp /var/lib/mysql)`) default paths excluded in a
+ backup. `/var/lib/mysql` is included because it's almost useless to take filesystem snapshots unless tables are flushed
+ and locked.
 
 # Recipes
 

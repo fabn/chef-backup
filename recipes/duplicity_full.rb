@@ -28,5 +28,6 @@ duply_profile 'filesystem_full' do
   target_pass node[:duplicity][:full][:target_pass]
   european_bucket node[:duplicity][:full][:european_bucket]
   encryption_password node[:duplicity][:full][:encryption_password]
+  exclude node[:duplicity][:full][:exclude]
   interval :daily
 end

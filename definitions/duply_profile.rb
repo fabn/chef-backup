@@ -26,6 +26,14 @@ define :duply_profile,
     variables template_variables
   end
 
+  # Excludes glob file list for this profile
+  excludes = params[:exclude] ? params[:exclude] : node[:duplicity][:default_excludes]
+  excludes = excludes.join("\n") if excludes.is_a? Array
+  # Populate exclude file with retrieved list
+  file "/etc/duply/#{profile_name}/exclude" do
+    content excludes
+  end if params[:exclude]
+
   # pre and post script
   file "/etc/duply/#{profile_name}/pre" do
     content params[:pre_script]
