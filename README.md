@@ -54,6 +54,9 @@ These attributes are used to configure the `duplicity_mysql` recipe and override
 
 Other generic attributes
 
+* `node[:backup][:hour_range]` (default 2..5) When cron jobs are generated for backup stuff they will be generate with random
+ hours in the given interval to avoid multiple jobs running at the same time potentially slowing down the whole thing.
+* `node[:backup][:minute_range]` (default 0..59) same as above.
 * `node[:duplicity][:archive_path]` (default `/var/cache/duplicity`) path used by duplicity to store cached stuff used
   to improve bandwidth usage and backup time for incremental backups
 * `node[:duplicity][:default_excludes]` (default `%w(/proc /sys /mnt /tmp /var/lib/mysql)`) default paths excluded in a

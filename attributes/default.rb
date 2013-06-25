@@ -6,6 +6,10 @@ default[:duplicity][:archive_path] = '/var/cache/duplicity'
 # it's useless to take filesystem snapshots unless tables are flushed and locked
 default[:duplicity][:default_excludes] = %w(/proc /sys /mnt /tmp /var/lib/mysql)
 
+# Hour range used to generate hours for cron
+default[:backup][:hour_range] = 2..5
+default[:backup][:minute_range] = 60
+
 # Default attributes used in duplicity profiles
 default[:duplicity][:defaults][:target] = nil
 default[:duplicity][:defaults][:target_user] = nil
