@@ -51,9 +51,13 @@ remote_file '/usr/bin/ec2-expire-snapshots' do
   group 'root'
 end
 
+# if node has mysql use it into snapshot
+snapshot_command = '/usr/bin/ec2-consistent-snapshot --auto-discovery --auto-freeze'
+snapshot_command << ' --mysql --mysql-master-status-file /var/lib/mysql/master.status' if node.recipes.include?('mysql::server')
+
 # Schedule a daily snapshot of mounted volumes
 cron 'daily ebs snapshot' do
-  command '/usr/bin/ec2-consistent-snapshot --auto-discovery --auto-freeze'
+  command snapshot_command
   hour 3
   minute 10
 end
