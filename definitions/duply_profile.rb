@@ -20,6 +20,7 @@ define :duply_profile,
   # Configure profile through template
   template "/etc/duply/#{profile_name}/conf" do
     source 'profile_conf.erb'
+    cookbook 'backup'
     owner 'root'
     group 'root'
     mode '0600'
