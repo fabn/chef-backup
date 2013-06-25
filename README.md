@@ -23,26 +23,36 @@ See also
 Attributes which should be set
 ------------------------------
 
-These attributes are used to configure the `duplicity_full` recipe
+These attributes are used to configure duplicity profiles
 
-* `node[:duplicity][:full][:target]` duplicity [target](http://duplicity.nongnu.org/duplicity.1.html#sect8) to use when
- doing full filesystem backups with `duplicity_full` recipe.
+* `node[:duplicity][:defaults][:target]` duplicity [target](http://duplicity.nongnu.org/duplicity.1.html#sect8) to use when
+ doing duplicity backups.
+* `node[:duplicity][:defaults][:target_user]` username to use if not embedded in `target`
+* `node[:duplicity][:defaults][:target_pass]` password to use if not embedded in `target`
+* `node[:duplicity][:defaults][:european_bucket]` (default false) if true an european bucket will be used for S3 targets
+* `node[:duplicity][:defaults][:encryption_password]` (default nil) if given backup will be symmetrically encrypted
+
+Attributes which should not require tuning
+------------------------------------------
+
+These attributes are used to configure the `duplicity_full` recipe and override defaults above
+
+* `node[:duplicity][:full][:target]` default `"#{node[:duplicity][:defaults][:target]}_files"`
 * `node[:duplicity][:full][:target_user]` username to use if not embedded in `target`
 * `node[:duplicity][:full][:target_pass]` password to use if not embedded in `target`
 * `node[:duplicity][:full][:european_bucket]` (default false) if true an european bucket will be used for S3 targets
 * `node[:duplicity][:full][:encryption_password]` (default nil) if given backup will be symmetrically encrypted
 * `node[:duplicity][:full][:exclude]` (default `node[:duplicity][:default_excludes]`) paths to exclude in a full backup
 
-These attributes are used to configure the `duplicity_mysql` backup, the meaning of attributes is the same of above
+These attributes are used to configure the `duplicity_mysql` recipe and override defaults above
 
-* `node[:duplicity][:mysql][:target]` duplicity target to store mysql backups
+* `node[:duplicity][:mysql][:target]` default `"#{node[:duplicity][:defaults][:target]}_mysql"`
 * `node[:duplicity][:mysql][:target_user]` username to use if not embedded in `target`
 * `node[:duplicity][:mysql][:target_pass]` password to use if not embedded in `target`
 * `node[:duplicity][:mysql][:european_bucket]` (default false) if true an european bucket will be used for S3 targets
 * `node[:duplicity][:mysql][:encryption_password]` (default nil) if given backup will be symmetrically encrypted
 
-Attributes which should not require tuning
-------------------------------------------
+Other generic attributes
 
 * `node[:duplicity][:archive_path]` (default `/var/cache/duplicity`) path used by duplicity to store cached stuff used
   to improve bandwidth usage and backup time for incremental backups
