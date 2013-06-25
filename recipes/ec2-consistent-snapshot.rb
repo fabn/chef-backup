@@ -35,6 +35,32 @@ end
   package(pkg) { action :install }
 end
 
+# Temporarily replace original file with my fork
+remote_file '/usr/bin/ec2-consistent-snapshot' do
+  source 'https://raw.github.com/fabn/ec2-consistent-snapshot/autofreeze/ec2-consistent-snapshot'
+  mode '0755'
+  owner 'root'
+  group 'root'
+end
+
+# Temporarily replace original file with my fork
+remote_file '/usr/bin/ec2-expire-snapshots' do
+  source 'https://raw.github.com/fabn/ec2-expire-snapshots/master/ec2-expire-snapshots'
+  mode '0755'
+  owner 'root'
+  group 'root'
+end
+
 # Schedule a daily snapshot of mounted volumes
+cron 'daily ebs snapshot' do
+  command '/usr/bin/ec2-consistent-snapshot --auto-discovery --auto-freeze'
+  hour 3
+  minute 10
+end
 
 # Schedule deletion of expired snapshots
+cron 'ebs snapshot expiration' do
+  command "/usr/bin/ec2-expire-snapshots --keep-most-recent #{node[:backup][:consistent_snapshots][:keep]}"
+  hour 3
+  minute 15
+end if node[:backup][:consistent_snapshots][:expire]

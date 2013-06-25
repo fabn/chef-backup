@@ -20,3 +20,8 @@ default[:duplicity][:mysql][:target_user] = node[:duplicity][:full][:target_user
 default[:duplicity][:mysql][:target_pass] = node[:duplicity][:full][:target_pass]
 default[:duplicity][:mysql][:european_bucket] = node[:duplicity][:full][:european_bucket]
 default[:duplicity][:mysql][:encryption_password] = node[:duplicity][:full][:encryption_password]
+
+
+# EBS snapshots to keep with ec2-consistent-snapshot recipe
+default[:backup][:consistent_snapshots][:expire] = false
+default[:backup][:consistent_snapshots][:keep] = 7
