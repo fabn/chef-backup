@@ -60,7 +60,7 @@ end
 
 # Schedule deletion of expired snapshots
 cron 'ebs snapshot expiration' do
-  command "/usr/bin/ec2-expire-snapshots --keep-most-recent #{node[:backup][:consistent_snapshots][:keep]}"
+  command "/usr/bin/ec2-expire-snapshots --auto-discovery --keep-most-recent #{node[:backup][:consistent_snapshots][:keep]}"
   hour 3
   minute 15
 end if node[:backup][:consistent_snapshots][:expire]

@@ -30,5 +30,5 @@ default[:duplicity][:mysql][:encryption_password] = node[:duplicity][:defaults][
 
 
 # EBS snapshots to keep with ec2-consistent-snapshot recipe
-default[:backup][:consistent_snapshots][:expire] = false
-default[:backup][:consistent_snapshots][:keep] = 7
+default[:backup][:consistent_snapshots][:expire] = true
+default[:backup][:consistent_snapshots][:keep] = 15
