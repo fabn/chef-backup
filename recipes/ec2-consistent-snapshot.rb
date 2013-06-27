@@ -58,14 +58,14 @@ snapshot_command << ' --mysql --mysql-master-status-file /var/lib/mysql/master.s
 # Schedule a daily snapshot of mounted volumes
 cron 'daily ebs snapshot' do
   command snapshot_command
-  hour 3
-  minute 10
+  hour rand(node[:backup][:hour_range])
+  minute rand(node[:backup][:minute_range])
 end
 
 # Schedule deletion of expired snapshots
 cron 'ebs snapshot expiration' do
   # Keep daily snapshots of last week, weekly snapshots for the last month, monthly snapshots for the last 6 month
   command '/usr/bin/ec2-expire-snapshots --auto-discover --keep-first-daily 7 --keep-first-weekly 4 --keep-first-monthly 6'
-  hour 3
-  minute 15
+  hour rand(node[:backup][:hour_range])
+  minute rand(node[:backup][:minute_range])
 end if node[:backup][:consistent_snapshots][:expire]
