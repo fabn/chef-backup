@@ -64,7 +64,7 @@ define :duply_profile,
 
     # Add a crontab entry
     cron "duply_#{profile_name}_#{params[:interval]}" do
-      command "/usr/bin/duply #{profile_name} backup_verify_purge_purge-full --force"
+      command "/usr/bin/duply #{profile_name} backup_purge_purge-full --force > /dev/null"
       hour rand(node[:backup][:hour_range])
       minute rand(node[:backup][:minute_range])
       day day
