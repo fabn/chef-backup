@@ -142,6 +142,9 @@ ARCH_DIR=<%= node[:duplicity][:archive_path] %>
 #            naming is compatible and this option is pending depreciation
 #DUPL_PARAMS="$DUPL_PARAMS --short-filenames "
 
+# Log duplicity operations to a log file
+DUPL_PARAMS="$DUPL_PARAMS --log-file /var/log/duplicity.log "
+
 # Always use new style for S3 buckets to allow selection of european buckets
 # don't forget to leave a separating space char at the end
 DUPL_PARAMS="$DUPL_PARAMS --s3-use-new-style "
