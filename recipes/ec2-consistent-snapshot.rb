@@ -55,9 +55,9 @@ end
 include_recipe 'system_base::aws_environment'
 
 # This file is created by system_base::aws_environment recipe
-aws_environment = '[ -r /etc/profile.d/aws-environment.sh ] && source /etc/profile.d/aws-environment.sh;'
+aws_environment = '[ -r /etc/profile.d/aws-environment.sh ] && . /etc/profile.d/aws-environment.sh;'
 # if node has mysql use it into snapshot
-snapshot_command = "#{aws_environment} /usr/bin/ec2-consistent-snapshot --auto-discover --auto-freeze"
+snapshot_command = "#{aws_environment} ec2-consistent-snapshot -a -f -q"
 snapshot_command << ' --mysql --mysql-master-status-file /var/lib/mysql/master.status' if node.recipes.include?('mysql::server')
 
 # Schedule a daily snapshot of mounted volumes
@@ -70,7 +70,7 @@ end
 # Schedule deletion of expired snapshots
 cron 'ebs snapshot expiration' do
   # Keep daily snapshots of last week, weekly snapshots for the last month, monthly snapshots for the last 6 month
-  command "#{aws_environment} /usr/bin/ec2-expire-snapshots --auto-discover --keep-first-daily 7 --keep-first-weekly 4 --keep-first-monthly 6"
+  command "#{aws_environment} ec2-expire-snapshots -q -a --keep-first-daily 7 --keep-first-weekly 4 --keep-first-monthly 6"
   hour rand(node[:backup][:hour_range])
   minute rand(node[:backup][:minute_range])
 end if node[:backup][:consistent_snapshots][:expire]
