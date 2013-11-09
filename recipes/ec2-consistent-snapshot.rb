@@ -57,7 +57,7 @@ include_recipe 'system_base::aws_environment'
 # This file is created by system_base::aws_environment recipe
 aws_environment = '[ -r /etc/profile.d/aws-environment.sh ] && . /etc/profile.d/aws-environment.sh;'
 # if node has mysql use it into snapshot
-snapshot_command = "#{aws_environment} ec2-consistent-snapshot -a -f -q"
+snapshot_command = "#{aws_environment} ec2-consistent-snapshot -a -q"
 snapshot_command << ' --mysql --mysql-master-status-file /var/lib/mysql/master.status' if node.recipes.include?('mysql::server')
 
 # Schedule a daily snapshot of mounted volumes
