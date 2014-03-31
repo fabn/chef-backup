@@ -24,6 +24,7 @@ include_recipe 'mysql_role::shell_config'
 # Download remote package, not included in usual apt repositories
 remote_file "/tmp/#{File.basename(node[:mysql_zrm][:package])}" do
   source node[:mysql_zrm][:package]
+  checksum node[:mysql_zrm][:checksum]
   action :create_if_missing
   not_if 'which mysql-zrm'
 end
