@@ -1,4 +1,4 @@
-# backup cookbook
+# backup cookbook [![Build Status](https://travis-ci.org/fabn/chef-backup.svg)](https://travis-ci.org/fabn/chef-backup)
 
 This cookbook contains backup utilities I've used in various setups.
 
