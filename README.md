@@ -113,7 +113,7 @@ Create a profile for backing up a given directory daily. First backup is a full 
  per month.
 
 ```ruby
-duply_profile "user\_home\_s3" do
+duply_profile "user_home_s3" do
   source '/home/user'
   target 's3://<bucket>/<prefix>'
 end
@@ -122,7 +122,7 @@ end
 Use all possible attributes (including defaults one)
 
 ```ruby
-duply_profile "user\_home\_s3" do
+duply_profile "user_home_s3" do
   source '/home/user'
   target 's3://<bucket>/<prefix>'
   interval :daily
