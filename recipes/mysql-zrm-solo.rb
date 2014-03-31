@@ -19,7 +19,7 @@
 
 # Ensure mysql is configured for root to allow mysql-zrm to take backups
 # using ~/.my.cnf file configured by this recipe
-include_recipe 'system_base::mysql_config'
+include_recipe 'mysql_role::shell_config'
 
 # Download remote package, not included in usual apt repositories
 remote_file "/tmp/#{File.basename(node[:mysql_zrm][:package])}" do
@@ -29,7 +29,7 @@ remote_file "/tmp/#{File.basename(node[:mysql_zrm][:package])}" do
 end
 
 # Install package dependencies for mysql-zrm
-%w(libxml-parser-perl bsd-mailx).each { |pkg| package pkg }
+%w(libxml-parser-perl mailutils).each { |pkg| package pkg }
 
 dpkg_package "/tmp/#{File.basename(node[:mysql_zrm][:package])}" do
   action :install
