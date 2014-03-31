@@ -1,0 +1,39 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_solo
+
+platforms:
+  - name: ubuntu-12.04
+    run_list:
+      - recipe[apt::default]
+
+suites:
+  - name: default
+    run_list:
+      # Install mysql otherwise there won't be a database to backup...
+      - recipe[mysql::server]
+      # Execute all recipes except ec2-consistent-snapshot
+      - recipe[backup::duplicity_full]
+      - recipe[backup::duplicity_mysql]
+    attributes:
+      mysql:
+        server_root_password: rootpass
+        server_debian_password: debpass
+        server_repl_password: replpass
+      duplicity:
+        full:
+          target: 'file:///tmp/full_backup'
+        mysql:
+          target: 'file:///tmp/mysql_backup'
+        backup:
+          hour_range: !ruby/range
+            begin: 2
+            end: 2
+            excl: false
+          minute_range: !ruby/range
+            begin: 35
+            end: 35
+            excl: false
