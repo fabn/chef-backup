@@ -27,7 +27,7 @@ describe 'Backups' do
   end
 
   describe 'Backups execution' do
-    # Full filesystem backup is skipped to avoid long running time, see filesystem_spec.rb for a smaller example
+    # Full filesystem backup is skipped to avoid long running time, see other tests for a smaller example
     describe command('HOME=/root duply mysql_zrm_incremental backup_purge_purge-full --force') do
       it { should return_exit_status(0) }
     end
