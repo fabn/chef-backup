@@ -13,7 +13,7 @@ Feature: Backup procedures with MySQL ZRM
   Scenario: Doing a MySQL full backup
     Given I successfully run `mysql-zrm-scheduler --now --backup-set localhost --backup-level 0`
     When I run `mysql-zrm-reporter --where backup-level=0 --where backup-set=localhost --show backup-status-info`
-    Then the output from "mysql-zrm-reporter --where backup-level=0 --where backup-set=localhost --show backup-status-info" should contain "Backup succeeded"
+    Then the output should contain "Backup succeeded"
     And a directory named "/var/lib/mysql-zrm/localhost/" should exist
     And a file named "/etc/mysql-zrm/localhost/last_backup" should exist
 
