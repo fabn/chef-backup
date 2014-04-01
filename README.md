@@ -132,6 +132,10 @@ duply_profile "user_home_s3" do
 end
 ```
 
+### Restore
+
+To restore backups created with these recipes see [restore document](Restore.md)
+
 # TODO
 
 * Create a `duplicity_data_bag` recipe to load duply profiles from a given data bag
