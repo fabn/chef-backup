@@ -6,8 +6,10 @@ And(/^I drop the database "([^"]*)"$/) do |db_name|
   system("mysql -e 'DROP DATABASE IF EXISTS #{db_name}'")
 end
 
-Then(/^the database "([^"]*)" should exist$/) do |db_name|
-  system("mysql -e 'SHOW DATABASES' | grep #{db_name}").should be_true
+Then(/^the database "([^"]*)" should (not )?exist$/) do |db_name, not_exist|
+  not_exist ?
+      `mysql -e 'SHOW DATABASES'`.should_not(include(db_name)) :
+      `mysql -e 'SHOW DATABASES'`.should(include(db_name))
 end
 
 Given(/^I succesfully took a backup with mysql-zrm for backup set "([^"]*)"$/) do |bs|
