@@ -34,6 +34,7 @@ duply_profile 'mysql_zrm_incremental' do
   encryption_password node[:duplicity][:mysql][:encryption_password]
   interval :daily
   pre_script 'mysql-zrm-scheduler --now --backup-set localhost --backup-level 1'
+  post_script 'mysql-zrm-purge --backup-set localhost'
 end
 
 # Do a weekly full backup for all databases
@@ -46,4 +47,5 @@ duply_profile 'mysql_zrm_full' do
   encryption_password node[:duplicity][:mysql][:encryption_password]
   interval :weekly
   pre_script 'mysql-zrm-scheduler --now --backup-set localhost --backup-level 0'
+  post_script 'mysql-zrm-purge --backup-set localhost'
 end

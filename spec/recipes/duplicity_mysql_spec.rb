@@ -47,4 +47,11 @@ describe 'backup::duplicity_mysql' do
                         .with_content('mysql-zrm-scheduler --now --backup-set localhost --backup-level 0')
   end
 
+  it 'should create post script to purge mysql-zrm old backups' do
+    expect(chef_run).to render_file('/etc/duply/mysql_zrm_incremental/post')
+                        .with_content('mysql-zrm-purge --backup-set localhost')
+    expect(chef_run).to render_file('/etc/duply/mysql_zrm_full/post')
+                        .with_content('mysql-zrm-purge --backup-set localhost')
+  end
+
 end
