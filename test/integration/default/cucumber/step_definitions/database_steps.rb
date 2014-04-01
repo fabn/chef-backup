@@ -6,6 +6,10 @@ And(/^I drop the database "([^"]*)"$/) do |db_name|
   system("mysql -e 'DROP DATABASE IF EXISTS #{db_name}'")
 end
 
+Then(/^the database "([^"]*)" should exist$/) do |db_name|
+  system("mysql -e 'SHOW DATABASES' | grep #{db_name}").should be_true
+end
+
 Given(/^I succesfully took a backup with mysql-zrm for backup set "([^"]*)"$/) do |bs|
   steps %Q{
       Given I successfully run `mysql-zrm-scheduler --now --backup-set #{bs} --backup-level 0`

@@ -26,6 +26,5 @@ Feature: Backup procedures with MySQL ZRM
     Given I succesfully took a backup with mysql-zrm for backup set "localhost"
     And I drop the database "fixtures"
     When I run `mysql-zrm-restore --backup-set localhost --source-directory $(cat /etc/mysql-zrm/localhost/last_backup)`
-    And I run `mysql -e 'SHOW DATABASES'`
-    Then the output from "mysql-zrm-restore --backup-set localhost --source-directory $(cat /etc/mysql-zrm/localhost/last_backup)" should contain "Restored database"
-    Then the output from "mysql -e 'SHOW DATABASES'" should contain "fixtures"
+    Then the output should contain "Restored database(s)"
+    And the database "fixtures" should exist
