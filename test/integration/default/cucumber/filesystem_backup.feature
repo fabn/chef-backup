@@ -21,7 +21,7 @@ Feature: Filesystem backup with duply
     """
     some content to backup
     """
-    And the restore directory does not exist
+    And the restore directory is empty
 
   Scenario: Doing a backup for a given profile
     Given I successfully run `duply johndoe backup_purge_purge-full --force`
@@ -31,9 +31,9 @@ Feature: Filesystem backup with duply
 
   Scenario: Restoring backup to a different location
     Given I took a backup for profile "johndoe"
-    When I run `duply johndoe restore /restores`
-    Then the output from "duply johndoe restore /restores" should contain "Finished state OK"
-    And a file named "/restores/testfile" should exist
+    When I run `duply johndoe restore /restores/johndoe`
+    Then the output from "duply johndoe restore /restores/johndoe" should contain "Finished state OK"
+    And a file named "/restores/johndoe/testfile" should exist
 
   Scenario: Restoring backup to the same position
     Given I took a backup for profile "johndoe"
@@ -44,6 +44,6 @@ Feature: Filesystem backup with duply
 
   Scenario: Partial restore of content
     Given I took a backup for profile "johndoe"
-    When I run `duply johndoe fetch testfile /tmp/restored`
+    When I run `duply johndoe fetch testfile /restores/restored_file`
     Then the output should contain "Finished state OK"
-    And a file named "/tmp/restored" should exist
+    And a file named "/restores/restored_file" should exist

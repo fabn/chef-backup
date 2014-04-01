@@ -13,6 +13,6 @@ Given(/^I took a backup for profile "([^"]*)"$/) do |profile|
   }
 end
 
-And(/^the restore directory does not exist$/) do
-  FileUtils.rmtree('/restores')
+And(/^the restore directory is empty$/) do
+  FileUtils.rmtree(Dir.glob('/restores/*'))
 end
