@@ -5,13 +5,13 @@ Feature: Filesystem backup with duply
 
   In this feature the following profile has been configured:
 
-  """
+  ```
   duply_profile 'johndoe' do
     source '/home/johndoe'
     target 'file:///tmp/johndoe_backup'
     encryption_password node[:duplicity][:defaults][:encryption_password]
   end
-  """
+  ```
 
   You can execute profile backups manually using the following commands.
 
