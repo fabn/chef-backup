@@ -9,6 +9,10 @@ describe 'backup::duplicity' do
     expect(chef_run).to install_package('duplicity')
   end
 
+  it 'should install duply 1.5.10' do
+    expect(chef_run).to render_file('/usr/bin/duply').with_content('1.5.10')
+  end
+
   it 'should create profiles folder' do
     expect(chef_run).to create_directory('/etc/duply').
                             with_user('root').with_group('root').with_mode('0700')

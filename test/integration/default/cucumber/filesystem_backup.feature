@@ -21,6 +21,7 @@ Feature: Filesystem backup with duply
     """
     some content to backup
     """
+    And the restore directory does not exist
 
   Scenario: Doing a backup for a given profile
     Given I successfully run `duply johndoe backup_purge_purge-full --force`

@@ -12,3 +12,7 @@ Given(/^I took a backup for profile "([^"]*)"$/) do |profile|
     Given I successfully run `duply #{profile} backup_purge_purge-full --force`
   }
 end
+
+And(/^the restore directory does not exist$/) do
+  FileUtils.rmtree('/restores')
+end

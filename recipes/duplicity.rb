@@ -21,6 +21,12 @@
   package(pkg) { action :install }
 end
 
+# This is needed for Ubuntu 12.04LTS, because provided package has a bug with restore.
+cookbook_file '/usr/bin/duply' do
+  source 'duply-1.5.10.sh'
+  only_if { node[:platform] == 'ubuntu' && node[:platform_version].to_f == 12.04 }
+end
+
 directory '/etc/duply' do
   action :create
   owner 'root'
