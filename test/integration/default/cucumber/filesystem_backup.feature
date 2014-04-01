@@ -41,3 +41,9 @@ Feature: Filesystem backup with duply
     When I run `duply johndoe restore /home/johndoe`
     Then the output should contain "Finished state OK"
     And a file named "/home/johndoe/testfile" should exist
+
+  Scenario: Partial restore of content
+    Given I took a backup for profile "johndoe"
+    When I run `duply johndoe fetch testfile /tmp/restored`
+    Then the output should contain "Finished state OK"
+    And a file named "/tmp/restored" should exist
