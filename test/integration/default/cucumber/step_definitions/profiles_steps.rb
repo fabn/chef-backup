@@ -4,7 +4,11 @@ end
 
 And(/^there are no backups in the system$/) do
   FileUtils.rmtree Dir.glob('/var/cache/duplicity/*')
-  FileUtils.rmtree('/tmp/full_backup')
-  FileUtils.rmtree('/tmp/mysql_backup')
-  FileUtils.rmtree('/tmp/duplicity_home_folders')
+  FileUtils.rmtree Dir.glob('/tmp/*_backup')
+end
+
+Given(/^I took a backup for profile "([^"]*)"$/) do |profile|
+  steps %Q{
+    Given I successfully run `duply #{profile} backup_purge_purge-full --force`
+  }
 end

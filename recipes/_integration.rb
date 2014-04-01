@@ -19,9 +19,11 @@
 
 # Private recipe used only in integration tests
 
-# Configure backups for an hypotetical web root
-duply_profile 'homes' do
-  source '/home'
-  target "#{node[:duplicity][:defaults][:target]}_home_folders"
+user 'johndoe'
+
+# Configure backups for an hypotetical user home
+duply_profile 'johndoe' do
+  source '/home/johndoe'
+  target 'file:///tmp/johndoe_backup'
   encryption_password node[:duplicity][:defaults][:encryption_password]
 end
