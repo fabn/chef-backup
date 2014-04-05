@@ -19,7 +19,7 @@ suites:
       - recipe[backup::duplicity_full]
       - recipe[backup::duplicity_mysql]
       # This recipe configure a backup profile for home directories
-      - recipe[backup::_integration]
+      - recipe[backup_test]
     attributes:
       mysql:
         server_root_password: rootpass

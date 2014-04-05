@@ -1,6 +1,6 @@
 #
-# Cookbook Name:: backup
-# Recipe:: _integration
+# Cookbook Name:: backup_test
+# Recipe:: default
 #
 # Copyright (C) 2014 Fabio Napoleoni
 #
